@@ -16,6 +16,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions("ProductType")
+
+    productFlavors {
+        internalTest {
+            dimension "ProductType"
+            buildConfigField 'String', 'SPACEX_BASE_URL', '"http://stage.spacexdata.com/v2/"'
+        }
+
+        production {
+            dimension "ProductType"
+            buildConfigField 'String', 'SPACEX_BASE_URL', '"https://api.spacexdata.com/v2/"'
+        }
+    }
+}
+
+ext {
+    retrofitVersion = '2.3.0'
+    okhttpVersion = "3.8.0"
 }
 
 dependencies {
@@ -25,4 +44,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    // Retrofit & rxJava
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.5'
+
 }
