@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -63,16 +64,25 @@ public class MainActivity extends BaseActivity {
                     public void onSuccess(ArrayList<SpaceXLaunchItem> result) {
                         progressBar.setVisibility(View.GONE);
                         if(result != null && result.size() > 0) {
+                            hideNoDataTryAgainLinearLayout();
                             launchListView.setAdapter(new LaunchListAdapter(result));
                         } else {
-
+                            showNoDataTryAgainLinearLayout("");
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         progressBar.setVisibility(View.GONE);
+                        showNoDataTryAgainLinearLayout(e.getMessage());
                     }
                 }));
     }
+
+    // LISTENERS
+    @OnClick(R.id.try_again_Button)
+    public void tryAgainButtonClicked(View v) {
+        getSpaceXLaunches();
+    }
+
 }

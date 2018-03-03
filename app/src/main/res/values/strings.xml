@@ -4,4 +4,6 @@
     <string name="launch_info_format">%1s, %2s</string>
     <string name="launch_success">Başarılı</string>
     <string name="launch_failed">Başarısız</string>
+    <string name="try_again">Tekrar Dene</string>
+    <string name="error_occurred">Hata Oluştu</string>
 </resources>

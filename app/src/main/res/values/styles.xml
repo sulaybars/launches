@@ -20,4 +20,14 @@
         <item name="android:minHeight">54dp</item>
     </style>
 
+    <style name="AppTheme.TextButton" parent="Widget.AppCompat.Button">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@android:color/holo_blue_light</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minWidth">140dp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
 </resources>
