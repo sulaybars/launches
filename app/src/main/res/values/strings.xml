@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Launches</string>
+
+    <string name="launch_info_format">%1s, %2s</string>
+    <string name="launch_success">Başarılı</string>
+    <string name="launch_failed">Başarısız</string>
 </resources>
