@@ -13,7 +13,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="14dp"
         android:layout_centerVertical="true"
-        fresco:placeholderImage="@drawable/rocket_placeholder"
+        fresco:placeholderImage="@drawable/gray_placeholder"
         android:scaleType="fitCenter"/>
 
     <TextView

@@ -6,4 +6,9 @@
     <string name="launch_failed">Başarısız</string>
     <string name="try_again">Tekrar Dene</string>
     <string name="error_occurred">Hata Oluştu</string>
+
+    <string name="filter">FİLTRE</string>
+    <string name="sort">Sırala</string>
+    <string name="sort_time_min_to_max">Tarihe göre artan</string>
+    <string name="sort_time_max_to_min">Tarihe göre azalan</string>
 </resources>

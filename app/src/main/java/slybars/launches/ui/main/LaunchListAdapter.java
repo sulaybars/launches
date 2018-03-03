@@ -36,8 +36,17 @@ public class LaunchListAdapter extends BaseAdapter {
         this.dataSource = data;
     }
 
+    public void updateData(ArrayList<SpaceXLaunchItem> data) {
+        this.dataSource = data;
+        notifyDataSetChanged();
+    }
+
+
     @Override
     public int getCount() {
+        if (dataSource == null) {
+            return 0;
+        }
         return dataSource.size();
     }
 
