@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="dividerColor">#DAE0E0</color>
+    <color name="success_state_color">#0FE528</color>
+    <color name="failed_state_color">#F02D0A</color>
 </resources>

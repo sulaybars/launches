@@ -1,6 +1,7 @@
 package slybars.launches.ui.main;
 
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import slybars.launches.LaunchesApplication;
 import slybars.launches.R;
+import slybars.launches.common.helper.DateHelper;
 import slybars.launches.model.entities.SpaceXLaunchItem;
 
 /**
@@ -62,8 +64,11 @@ public class LaunchListAdapter extends BaseAdapter {
         }
 
         SpaceXLaunchItem launchItem = getItem(position);
-        String launchState = parent.getContext().getString(launchItem.launch_success ? R.string.launch_success : R.string.launch_failed);
-        holder.launchDetailTextView.setText(parent.getContext().getString(R.string.launch_info_format, launchItem.launch_year, launchState));
+        String launchDate = DateHelper.getInstance().convertServiceDateToShortDate(launchItem.getLaunch_date_utc());
+        holder.launchInfoTextView.setText(parent.getContext().getString(R.string.launch_info_format, launchDate, launchItem.rocket.getRocket_name()));
+
+        holder.launchStateTextView.setText(parent.getContext().getString(launchItem.launch_success ? R.string.launch_success : R.string.launch_failed));
+        holder.launchStateTextView.setTextColor(ContextCompat.getColor(parent.getContext(), launchItem.launch_success ? R.color.success_state_color : R.color.failed_state_color));
 
         String imageUrl = launchItem.getLaunchImageUrl();
         int size = (int) (44.0f * LaunchesApplication.getApplication().getResources().getDisplayMetrics().density);
@@ -75,17 +80,19 @@ public class LaunchListAdapter extends BaseAdapter {
         controller.setImageRequest(request);
         holder.launchImageView.setController(controller.build());
 
-
         return convertView;
     }
 
     static class LaunchViewHolder {
 
-        @BindView(R.id.launch_detail_TextView)
-        TextView launchDetailTextView;
-
         @BindView(R.id.launch_ImageView)
         SimpleDraweeView launchImageView;
+
+        @BindView(R.id.launch_info_TextView)
+        TextView launchInfoTextView;
+
+        @BindView(R.id.launch_state_TextView)
+        TextView launchStateTextView;
 
         private LaunchViewHolder(View view) {
             ButterKnife.bind(this, view);

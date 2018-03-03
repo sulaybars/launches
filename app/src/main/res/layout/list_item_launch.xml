@@ -2,27 +2,40 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="10dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/launch_ImageView"
         android:layout_width="44dp"
         android:layout_height="44dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="14dp"
         android:layout_centerVertical="true"
+        fresco:placeholderImage="@drawable/rocket_placeholder"
         android:scaleType="fitCenter"/>
 
     <TextView
-        android:id="@+id/launch_detail_TextView"
+        android:id="@+id/launch_info_TextView"
         style="@style/AppTheme.ListItemText"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
-        android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/launch_ImageView" />
 
-    <include layout="@layout/list_divider" />
+    <TextView
+        android:id="@+id/launch_state_TextView"
+        style="@style/AppTheme.ListItemText"
+        android:layout_alignLeft="@+id/launch_info_TextView"
+        android:layout_alignRight="@+id/launch_info_TextView"
+        android:layout_below="@+id/launch_info_TextView"/>
+
+    <View
+        android:id="@+id/divider_View"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/launch_state_TextView"
+        android:layout_marginTop="10dp"
+        android:background="@color/dividerColor" />
 
 </RelativeLayout>

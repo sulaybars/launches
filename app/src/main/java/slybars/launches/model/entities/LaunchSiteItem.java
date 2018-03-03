@@ -7,11 +7,11 @@ package slybars.launches.model.entities;
 public class LaunchSiteItem {
 
     private String site_id;
-    private String launch_site;
+    private String site_name;
     private String site_name_long;
 
     public String getLaunch_site() {
-        return launch_site == null ? "" : launch_site;
+        return site_name == null ? "" : site_name;
     }
 
     public String getSite_name_long() {

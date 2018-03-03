@@ -10,7 +10,8 @@ public class SpaceXLaunchItem {
     public String launch_year;
     public double launch_date_unix;
     private String launch_date_utc;
-    private LaunchSiteItem launch_site;
+    public RocketItem rocket;
+    public LaunchSiteItem launch_site;
     public boolean launch_success;
     public LinksItem links;
     private String details;
