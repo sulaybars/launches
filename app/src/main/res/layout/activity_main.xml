@@ -11,7 +11,7 @@
         android:layout_height="48dp"
         android:background="@android:color/white"
         android:gravity="center"
-        android:visibility="visible"
+        android:visibility="gone"
         android:weightSum="2">
 
         <Button

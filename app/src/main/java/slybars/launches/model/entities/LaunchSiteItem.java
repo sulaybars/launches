@@ -1,10 +1,12 @@
 package slybars.launches.model.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by slybars on 03/03/2018.
  */
 
-public class LaunchSiteItem {
+public class LaunchSiteItem implements Serializable {
 
     private String site_id;
     private String site_name;

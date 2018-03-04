@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_dialog_bg"
+    android:paddingBottom="24dp">
+
+    <TextView
+        android:id="@+id/title_TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:paddingBottom="24dp"
+        android:paddingTop="30dp"
+        android:text="@string/filter"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/filter_title_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/title_TextView"
+        android:layout_marginLeft="16dp"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="@string/filter_year_title"/>
+
+    <TextView
+        android:id="@+id/filter_range_value_TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_light"
+        android:layout_below="@+id/title_TextView"
+        android:layout_toRightOf="@+id/filter_title_TextView"
+        android:gravity="right"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16dp"/>
+
+    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+        android:id="@+id/filter_RangeSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/filter_range_value_TextView"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
+
+    <TextView
+        android:id="@+id/filtered_count_TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:layout_below="@+id/filter_RangeSeekBar"
+        android:layout_toRightOf="@+id/filter_title_TextView"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textSize="16dp"/>
+
+    <Button
+        android:id="@+id/close_Button"
+        style="@style/AppTheme.TextButton"
+        android:layout_below="@+id/filtered_count_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/ok"/>
+
+</RelativeLayout>

@@ -1,13 +1,15 @@
 package slybars.launches.model.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by slybars on 03/03/2018.
  */
 
-public class SpaceXLaunchItem {
+public class SpaceXLaunchItem implements Serializable{
 
     public int flight_number;
-    public String launch_year;
+    public int launch_year;
     public double launch_date_unix;
     private String launch_date_utc;
     public RocketItem rocket;

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Launches</string>
+    <string name="ok">Tamam</string>
 
     <string name="launch_info_format">%1s - %2s</string>
     <string name="launch_success">Başarılı</string>
@@ -8,7 +9,12 @@
     <string name="error_occurred">Hata Oluştu</string>
 
     <string name="filter">FİLTRE</string>
+    <string name="filtered_launch_count">%1$d/%2$d kalkış bulundu.</string>
+    <string name="filter_range_value_format">%1$d - %2$d</string>
+    <string name="filter_year_title">Yıl</string>
+
     <string name="sort">Sırala</string>
     <string name="sort_time_min_to_max">Tarihe göre artan</string>
     <string name="sort_time_max_to_min">Tarihe göre azalan</string>
+
 </resources>
