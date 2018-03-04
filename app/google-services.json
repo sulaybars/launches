@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "491974460750",
+    "firebase_url": "https://launches-android.firebaseio.com",
+    "project_id": "launches-android",
+    "storage_bucket": "launches-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491974460750:android:a1f656c33bd0d4dd",
+        "android_client_info": {
+          "package_name": "slybars.launches"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491974460750-jho60kubabo3b61v13m4cei1amfnhoti.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "slybars.launches",
+            "certificate_hash": "e1786d5fc16b44cb4f52322d78aeb416f3a7a25c"
+          }
+        },
+        {
+          "client_id": "491974460750-k9qh7rv8grh4nfh67jbinhutu3v4fbqu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9jwe7AHbNIU0LG4GAdmg4Om3tk098rj8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491974460750-k9qh7rv8grh4nfh67jbinhutu3v4fbqu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

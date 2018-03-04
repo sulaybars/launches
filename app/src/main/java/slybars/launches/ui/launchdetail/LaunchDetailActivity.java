@@ -23,6 +23,7 @@ import butterknife.OnClick;
 import slybars.launches.LaunchesApplication;
 import slybars.launches.R;
 import slybars.launches.common.helper.DateHelper;
+import slybars.launches.common.helper.LogHelper;
 import slybars.launches.model.entities.SpaceXLaunchItem;
 import slybars.launches.ui.base.BaseActivity;
 
@@ -77,12 +78,17 @@ public class LaunchDetailActivity extends BaseActivity {
         initView();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogHelper.getInstance().logScreenName(LaunchDetailActivity.this, LogHelper.logScreenName_launchDetail);
+    }
 
     private void initView() {
         launchDateTextView.setText(DateHelper.getInstance().convertServiceDateToShortDate(spaceXLaunchItem.getLaunch_date_utc()));
 
         launchStateTextView.setText(getString(spaceXLaunchItem.launch_success ? R.string.launch_success : R.string.launch_failed));
-        launchStateTextView.setTextColor(ContextCompat.getColor(this, spaceXLaunchItem.launch_success ? 
+        launchStateTextView.setTextColor(ContextCompat.getColor(this, spaceXLaunchItem.launch_success ?
                 R.color.success_state_color : R.color.failed_state_color));
 
         String imageUrl = spaceXLaunchItem.getLaunchImageUrl();
@@ -118,5 +124,5 @@ public class LaunchDetailActivity extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
     }
-        
+
 }

@@ -27,6 +27,7 @@ import slybars.launches.R;
 import slybars.launches.common.dialogFragments.LaunchFilterDialogFragment;
 import slybars.launches.common.dialogFragments.LaunchFilterListener;
 import slybars.launches.common.helper.FilterHelper;
+import slybars.launches.common.helper.LogHelper;
 import slybars.launches.common.helper.SortHelper;
 import slybars.launches.model.entities.SpaceXLaunchItem;
 import slybars.launches.model.entities.filter.LaunchFilterItem;
@@ -66,6 +67,12 @@ public class MainActivity extends BaseActivity implements LaunchFilterListener, 
 
         launchListView.setOnItemClickListener(this);
         getSpaceXLaunches();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogHelper.getInstance().logScreenName(MainActivity.this, LogHelper.logScreenName_main);
     }
 
     @Override

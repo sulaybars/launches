@@ -3,6 +3,7 @@ package slybars.launches;
 import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
  * Created by slybars on 03/03/2018.
@@ -11,7 +12,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 public class LaunchesApplication extends Application {
 
     private static LaunchesApplication launchesApplication;
-
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     public void onCreate() {
@@ -25,5 +26,11 @@ public class LaunchesApplication extends Application {
         return launchesApplication;
     }
 
+    public FirebaseAnalytics getFirebaseAnalytics() {
+        if (firebaseAnalytics == null) {
+            firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        }
+        return firebaseAnalytics;
+    }
 
 }
