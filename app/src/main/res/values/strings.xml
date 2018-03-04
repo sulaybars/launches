@@ -23,4 +23,5 @@
     <string name="launch_detail_toolbar_title">Fırlatma Detayı</string>
     <string name="launch_site">Fırlatma Yeri : %1s</string>
     <string name="rocket_info">Roket Bilgisi : %1s, %2s</string>
+    <string name="no_launch_detail_data">Fırlatma detayı bulunamadı.</string>
 </resources>

@@ -1,6 +1,11 @@
 package slybars.launches.model.entities;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
+
+import slybars.launches.LaunchesApplication;
+import slybars.launches.R;
 
 /**
  * Created by slybars on 03/03/2018.
@@ -19,7 +24,11 @@ public class SpaceXLaunchItem implements Serializable{
     private String details;
 
     public String getDetails() {
-        return details == null ? "" : details;
+        if(!TextUtils.isEmpty(details)) {
+            return details;
+        }
+
+        return LaunchesApplication.getApplication().getString(R.string.no_launch_detail_data);
     }
 
     public String getLaunch_date_utc() {
