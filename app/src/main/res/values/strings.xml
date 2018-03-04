@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Launches</string>
-    <string name="ok">Tamam</string>
 
     <string name="launch_toolbar_title">Fırlatma Listesi</string>
 
@@ -14,6 +13,8 @@
     <string name="filtered_launch_count">%1$d/%2$d fırlatma bulundu.</string>
     <string name="filter_range_value_format">%1$d - %2$d</string>
     <string name="filter_year_title">Yıl</string>
+    <string name="apply_title">Uygula</string>
+    <string name="clear_filter_title">Sıfırla</string>
 
     <string name="sort">Sırala</string>
     <string name="sort_time_min_to_max">Tarihe göre artan</string>

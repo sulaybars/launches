@@ -58,18 +58,18 @@ public class FilterHelper {
 
 
     // ******** Apply Filter ********
-    public void applyFilter(LaunchFilterItem launchFilterItem) {
-        ArrayList<SpaceXLaunchItem> filteredLaunchItems = new ArrayList<>(launchFilterItem.launchItems);
-
-        launchFilterItem.filteredLaunchItems = applyYearRangeFilter(filteredLaunchItems);
+    public void applyFilter(LaunchFilterItem newLaunchFilterItem) {
+        ArrayList<SpaceXLaunchItem> filteredLaunchItems = new ArrayList<>(newLaunchFilterItem.launchItems);
+        newLaunchFilterItem.filteredLaunchItems = applyYearRangeFilter(filteredLaunchItems, newLaunchFilterItem.yearFilterRangeItem);
+        launchFilterItem = newLaunchFilterItem;
     }
 
-    private ArrayList<SpaceXLaunchItem> applyYearRangeFilter(ArrayList<SpaceXLaunchItem> launchItems) {
+    private ArrayList<SpaceXLaunchItem> applyYearRangeFilter(ArrayList<SpaceXLaunchItem> launchItems, FilterRangeItem filterRangeItem) {
         ArrayList<SpaceXLaunchItem> filteredLaunchList = new ArrayList<>();
 
         for (SpaceXLaunchItem launchItem : launchItems) {
-            if (launchItem.launch_year <= launchFilterItem.yearFilterRangeItem.selectedMaxValue
-                    && launchItem.launch_year >= launchFilterItem.yearFilterRangeItem.selectedMinValue) {
+            if (launchItem.launch_year <= filterRangeItem.selectedMaxValue
+                    && launchItem.launch_year >= filterRangeItem.selectedMinValue) {
                 filteredLaunchList.add(launchItem);
             }
         }
@@ -77,6 +77,18 @@ public class FilterHelper {
         return filteredLaunchList;
     }
 
+    public ArrayList<SpaceXLaunchItem> applyYearRangeFilterWithTempValues(ArrayList<SpaceXLaunchItem> launchItems, FilterRangeItem filterRangeItem) {
+        ArrayList<SpaceXLaunchItem> filteredLaunchList = new ArrayList<>();
+
+        for (SpaceXLaunchItem launchItem : launchItems) {
+            if (launchItem.launch_year <= filterRangeItem.tempSelectedMaxValue
+                    && launchItem.launch_year >= filterRangeItem.tempSelectedMinValue) {
+                filteredLaunchList.add(launchItem);
+            }
+        }
+
+        return filteredLaunchList;
+    }
 
 
     // ******** Clear Filter ********

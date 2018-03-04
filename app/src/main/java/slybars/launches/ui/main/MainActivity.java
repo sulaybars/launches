@@ -46,6 +46,8 @@ public class MainActivity extends BaseActivity implements LaunchFilterListener, 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
+    private LaunchFilterDialogFragment filterDialogFragment;
+
     private Dialog sortDialog;
     private RadioGroup sortRadioGroup;
 
@@ -147,10 +149,15 @@ public class MainActivity extends BaseActivity implements LaunchFilterListener, 
 
     @Override
     public void OnFilterApplyAndDismiss(LaunchFilterItem newLaunchFilterItem) {
-        launchFilterItem = newLaunchFilterItem;
-        sortLaunchList();
-        if(!isFinishing() && launchListAdapter != null) {
-            launchListAdapter.updateData(launchFilterItem.filteredLaunchItems);
+        if(!isFinishing() ) {
+            launchFilterItem = newLaunchFilterItem;
+            sortLaunchList();
+            if (launchListAdapter != null) {
+                launchListAdapter.updateData(launchFilterItem.filteredLaunchItems);
+            } else {
+                launchListAdapter = new LaunchListAdapter(launchFilterItem.filteredLaunchItems);
+                launchListView.setAdapter(launchListAdapter);
+            }
         }
     }
 
@@ -218,8 +225,8 @@ public class MainActivity extends BaseActivity implements LaunchFilterListener, 
 
     private void showFilterDialog() {
         if (!isFinishing()) {
-            LaunchFilterDialogFragment.getInstance(MainActivity.this, launchFilterItem)
-                    .show(getSupportFragmentManager(), LaunchFilterDialogFragment.TAG);
+            filterDialogFragment = LaunchFilterDialogFragment.getInstance(MainActivity.this, launchFilterItem);
+            filterDialogFragment.show(getSupportFragmentManager(), LaunchFilterDialogFragment.TAG);
         }
     }
 

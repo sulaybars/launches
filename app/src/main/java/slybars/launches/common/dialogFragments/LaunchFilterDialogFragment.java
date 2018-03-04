@@ -13,12 +13,15 @@ import android.widget.TextView;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import slybars.launches.LaunchesApplication;
 import slybars.launches.R;
 import slybars.launches.common.helper.FilterHelper;
+import slybars.launches.model.entities.SpaceXLaunchItem;
 import slybars.launches.model.entities.filter.LaunchFilterItem;
 
 /**
@@ -66,28 +69,21 @@ public class LaunchFilterDialogFragment extends android.support.v4.app.DialogFra
 
         launchFilterItem = (LaunchFilterItem) getArguments().getSerializable(LAUNCH_FILTER_ITEM_EXTRA);
 
-        filterCrystalRangeSeekBar.setMinStartValue(launchFilterItem.yearFilterRangeItem.selectedMinValue);
-        filterCrystalRangeSeekBar.setMaxStartValue(launchFilterItem.yearFilterRangeItem.selectedMaxValue);
-
-        filterCrystalRangeSeekBar.setMinValue(launchFilterItem.yearFilterRangeItem.minValue);
-        filterCrystalRangeSeekBar.setMaxValue(launchFilterItem.yearFilterRangeItem.maxValue);
-
-        filterCrystalRangeSeekBar.setSteps(1);
-        filterCrystalRangeSeekBar.apply();
-
+        initFilterView();
         filterCrystalRangeSeekBar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
             public void valueChanged(Number minValue, Number maxValue) {
                 if(launchFilterItem != null) {
-                    launchFilterItem.yearFilterRangeItem.selectedMaxValue = maxValue.intValue();
-                    launchFilterItem.yearFilterRangeItem.selectedMinValue = minValue.intValue();
+                    launchFilterItem.yearFilterRangeItem.tempSelectedMaxValue = maxValue.intValue();
+                    launchFilterItem.yearFilterRangeItem.tempSelectedMinValue = minValue.intValue();
                     filterRangeTextView.setText(getString(R.string.filter_range_value_format,
-                            launchFilterItem.yearFilterRangeItem.selectedMinValue,
-                            launchFilterItem.yearFilterRangeItem.selectedMaxValue));
+                            launchFilterItem.yearFilterRangeItem.tempSelectedMinValue,
+                            launchFilterItem.yearFilterRangeItem.tempSelectedMaxValue));
 
-                    FilterHelper.getInstance().applyFilter(launchFilterItem);
+                    ArrayList<SpaceXLaunchItem> tempList = FilterHelper.getInstance().applyYearRangeFilterWithTempValues(launchFilterItem.launchItems,
+                            launchFilterItem.yearFilterRangeItem);
                     countTextView.setText(getString(R.string.filtered_launch_count,
-                            launchFilterItem.filteredLaunchItems.size(),
+                            tempList.size(),
                             launchFilterItem.launchItems.size()));
                 }
             }
@@ -110,8 +106,16 @@ public class LaunchFilterDialogFragment extends android.support.v4.app.DialogFra
         return rootView;
     }
 
-    @OnClick(R.id.close_Button)
-    public void OnCloseButtonClicked(View v) {
+    @OnClick(R.id.apply_Button)
+    public void OnApplyButtonClicked(View v) {
+        launchFilterItem.yearFilterRangeItem.applyTempValues();
+        FilterHelper.getInstance().applyFilter(launchFilterItem);
+        dismiss();
+    }
+
+    @OnClick(R.id.clear_filter_Button)
+    public void OnClearFilterButtonClicked(View v) {
+        launchFilterItem = FilterHelper.getInstance().clearFilter();
         dismiss();
     }
 
@@ -121,5 +125,17 @@ public class LaunchFilterDialogFragment extends android.support.v4.app.DialogFra
         if(listener != null) {
             listener.OnFilterApplyAndDismiss(launchFilterItem);
         }
+    }
+
+    private void initFilterView() {
+
+        filterCrystalRangeSeekBar.setMinStartValue(launchFilterItem.yearFilterRangeItem.selectedMinValue);
+        filterCrystalRangeSeekBar.setMaxStartValue(launchFilterItem.yearFilterRangeItem.selectedMaxValue);
+
+        filterCrystalRangeSeekBar.setMinValue(launchFilterItem.yearFilterRangeItem.minValue);
+        filterCrystalRangeSeekBar.setMaxValue(launchFilterItem.yearFilterRangeItem.maxValue);
+
+        filterCrystalRangeSeekBar.setSteps(1);
+        filterCrystalRangeSeekBar.apply();
     }
 }

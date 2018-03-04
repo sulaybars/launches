@@ -14,17 +14,27 @@ public class FilterRangeItem implements Serializable {
     public int selectedMinValue;
     public int selectedMaxValue;
 
+    public int tempSelectedMinValue;
+    public int tempSelectedMaxValue;
+
     public FilterRangeItem() {
     }
 
     public void setAllMinValues(int min) {
         minValue = min;
         selectedMinValue = min;
+        tempSelectedMinValue = min;
     }
 
     public void setAllMaxValues(int max) {
         maxValue = max;
         selectedMaxValue = max;
+        tempSelectedMaxValue = max;
+    }
+
+    public void applyTempValues() {
+        selectedMaxValue = tempSelectedMaxValue;
+        selectedMinValue = tempSelectedMinValue;
     }
 
 }
