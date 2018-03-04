@@ -2,6 +2,8 @@
     <string name="app_name">Launches</string>
     <string name="ok">Tamam</string>
 
+    <string name="launch_toolbar_title">Fırlatma Listesi</string>
+
     <string name="launch_info_format">%1s - %2s</string>
     <string name="launch_success">Başarılı</string>
     <string name="launch_failed">Başarısız</string>
@@ -9,7 +11,7 @@
     <string name="error_occurred">Hata Oluştu</string>
 
     <string name="filter">FİLTRE</string>
-    <string name="filtered_launch_count">%1$d/%2$d kalkış bulundu.</string>
+    <string name="filtered_launch_count">%1$d/%2$d fırlatma bulundu.</string>
     <string name="filter_range_value_format">%1$d - %2$d</string>
     <string name="filter_year_title">Yıl</string>
 
@@ -17,4 +19,8 @@
     <string name="sort_time_min_to_max">Tarihe göre artan</string>
     <string name="sort_time_max_to_min">Tarihe göre azalan</string>
 
+    <!-- Launch Detail -->
+    <string name="launch_detail_toolbar_title">Fırlatma Detayı</string>
+    <string name="launch_site">Fırlatma Yeri : %1s</string>
+    <string name="rocket_info">Roket Bilgisi : %1s, %2s</string>
 </resources>

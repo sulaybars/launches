@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -31,8 +32,9 @@ import slybars.launches.model.entities.SpaceXLaunchItem;
 import slybars.launches.model.entities.filter.LaunchFilterItem;
 import slybars.launches.model.remote.DataServiceProvider;
 import slybars.launches.ui.base.BaseActivity;
+import slybars.launches.ui.launchdetail.LaunchDetailActivity;
 
-public class MainActivity extends BaseActivity implements LaunchFilterListener {
+public class MainActivity extends BaseActivity implements LaunchFilterListener, AdapterView.OnItemClickListener {
 
     @BindView(R.id.filter_and_sort_LinearLayout)
     LinearLayout filterAndSortLinearLayout;
@@ -62,6 +64,7 @@ public class MainActivity extends BaseActivity implements LaunchFilterListener {
 
         ButterKnife.bind(this);
 
+        launchListView.setOnItemClickListener(this);
         getSpaceXLaunches();
     }
 
@@ -129,6 +132,14 @@ public class MainActivity extends BaseActivity implements LaunchFilterListener {
         }
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        SpaceXLaunchItem selectedListItem = (SpaceXLaunchItem) adapterView.getItemAtPosition(i);
+
+        if(selectedListItem != null) {
+            startActivity(LaunchDetailActivity.getLaunchDetailIntent(MainActivity.this, selectedListItem));
+        }
+    }
 
 
     // private Methods
@@ -189,6 +200,7 @@ public class MainActivity extends BaseActivity implements LaunchFilterListener {
                     .show(getSupportFragmentManager(), LaunchFilterDialogFragment.TAG);
         }
     }
+
 
 
 }

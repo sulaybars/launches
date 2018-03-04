@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--TOOLBAR-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_launch_detail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_gravity="top"
+        android:background="@color/colorPrimary"
+        android:elevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/back_Button"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/back_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/back_Button"
+                android:text="@string/launch_detail_toolbar_title"
+                android:textColor="@android:color/white"
+                android:textSize="17dp"
+                android:fontFamily="@font/roboto_medium"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/launch_detail_ImageView"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        fresco:placeholderImage="@drawable/gray_placeholder"
+        android:scaleType="fitCenter"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+       android:layout_below="@+id/toolbar_launch_detail"/>
+
+    <TextView
+        android:id="@+id/launch_detail_date_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:layout_below="@+id/launch_detail_ImageView"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/launch_detail_state_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="16dp"
+        android:layout_below="@+id/launch_detail_date_TextView"/>
+
+    <View
+        android:id="@+id/divider_View"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/launch_detail_state_TextView"
+        android:layout_marginTop="10dp"
+        android:background="@color/dividerColor" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/divider_View"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/launch_site_TextView"
+                style="@style/AppTheme.ListItemText"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/dividerColor" />
+
+            <TextView
+                android:id="@+id/rocket_info_TextView"
+                style="@style/AppTheme.ListItemText"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/dividerColor" />
+
+            <TextView
+                android:id="@+id/launch_detail_TextView"
+                style="@style/AppTheme.ListItemText"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/dividerColor" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
