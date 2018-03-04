@@ -76,6 +76,15 @@ public class MainActivity extends BaseActivity implements LaunchFilterListener, 
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if(isFromBackground) {
+            isFromBackground = false;
+            getSpaceXLaunches();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         compositeDisposable.dispose();
@@ -94,8 +103,14 @@ public class MainActivity extends BaseActivity implements LaunchFilterListener, 
                         progressBar.setVisibility(View.GONE);
                         if(result != null && result.size() > 0) {
                             hideNoDataTryAgainLinearLayout();
-                            launchFilterItem = FilterHelper.getInstance().createLaunchFilterData(result);
+
+                            if(launchFilterItem == null) {
+                                launchFilterItem = FilterHelper.getInstance().createLaunchFilterData(result);
+                            } else {
+                                launchFilterItem = FilterHelper.getInstance().updateFilter(launchFilterItem, result);
+                            }
                             sortLaunchList();
+
                             launchListAdapter = new LaunchListAdapter(launchFilterItem.filteredLaunchItems);
                             launchListView.setAdapter(launchListAdapter);
                             filterAndSortLinearLayout.setVisibility(View.VISIBLE);
