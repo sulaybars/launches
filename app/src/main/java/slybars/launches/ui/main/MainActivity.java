@@ -165,8 +165,8 @@ public class MainActivity extends BaseActivity implements LaunchFilterListener, 
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         SpaceXLaunchItem selectedListItem = (SpaceXLaunchItem) adapterView.getItemAtPosition(i);
 
-        if(selectedListItem != null) {
-            startActivity(LaunchDetailActivity.getLaunchDetailIntent(MainActivity.this, selectedListItem));
+        if(selectedListItem != null && adapterView.getAdapter() == launchListAdapter) {
+            startActivity(LaunchDetailActivity.getLaunchDetailIntent(MainActivity.this, launchListAdapter.getDataSource(), i));
         }
     }
 

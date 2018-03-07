@@ -11,7 +11,7 @@ import slybars.launches.R;
  * Created by slybars on 03/03/2018.
  */
 
-public class SpaceXLaunchItem implements Serializable{
+public class SpaceXLaunchItem implements Serializable {
 
     public int flight_number;
     public int launch_year;

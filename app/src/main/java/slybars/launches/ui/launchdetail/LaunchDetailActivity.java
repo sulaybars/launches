@@ -2,27 +2,18 @@ package slybars.launches.ui.launchdetail;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.common.ResizeOptions;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import slybars.launches.LaunchesApplication;
 import slybars.launches.R;
-import slybars.launches.common.helper.DateHelper;
 import slybars.launches.common.helper.LogHelper;
 import slybars.launches.model.entities.SpaceXLaunchItem;
 import slybars.launches.ui.base.BaseActivity;
@@ -33,35 +24,23 @@ import slybars.launches.ui.base.BaseActivity;
 
 public class LaunchDetailActivity extends BaseActivity {
 
-    private static final String SPACE_X_LAUNCH_ITEM_EXTRA = "SPACE_X_LAUNCH_ITEM_EXTRA";
+    private static String LAUNCH_LIST_ITEM_EXTRA = "LAUNCH_LIST_ITEM_EXTRA";
+    private static String INDEX_EXTRA = "INDEX_EXTRA";
 
     //TOOLBAR
     @BindView(R.id.toolbar_launch_detail)
     Toolbar toolbar;
 
-    @BindView(R.id.launch_detail_ImageView)
-    SimpleDraweeView launchImageView;
+    @BindView(R.id.launch_detail_ViewPager)
+    ViewPager launchDetailViewPager;
 
-    @BindView(R.id.launch_detail_date_TextView)
-    TextView launchDateTextView;
+    private ArrayList<SpaceXLaunchItem> launchList;
+    private int index;
 
-    @BindView(R.id.launch_detail_state_TextView)
-    TextView launchStateTextView;
-
-    @BindView(R.id.launch_site_TextView)
-    TextView launchSiteTextView;
-
-    @BindView(R.id.rocket_info_TextView)
-    TextView rocketInfoTextView;
-
-    @BindView(R.id.launch_detail_TextView)
-    TextView launchDetailTextView;
-
-    private SpaceXLaunchItem spaceXLaunchItem;
-
-    public static Intent getLaunchDetailIntent(Context context, SpaceXLaunchItem spaceXLaunchItem) {
+    public static Intent getLaunchDetailIntent(Context context, ArrayList<SpaceXLaunchItem> launchItems, int index) {
         Intent launchDetailIntent = new Intent(context, LaunchDetailActivity.class);
-        launchDetailIntent.putExtra(SPACE_X_LAUNCH_ITEM_EXTRA, spaceXLaunchItem);
+        launchDetailIntent.putExtra(LAUNCH_LIST_ITEM_EXTRA, launchItems);
+        launchDetailIntent.putExtra(INDEX_EXTRA, index);
         return launchDetailIntent;
     }
 
@@ -72,10 +51,14 @@ public class LaunchDetailActivity extends BaseActivity {
 
         ButterKnife.bind(this);
 
-        spaceXLaunchItem = (SpaceXLaunchItem) getIntent().getExtras().getSerializable(SPACE_X_LAUNCH_ITEM_EXTRA);
+        launchList = (ArrayList<SpaceXLaunchItem>) getIntent().getExtras().getSerializable(LAUNCH_LIST_ITEM_EXTRA);
+        index = getIntent().getIntExtra(INDEX_EXTRA, 0);
 
         initActionBar();
-        initView();
+
+        LaunchDetailPagerAdapter adapter = new LaunchDetailPagerAdapter(getSupportFragmentManager(), launchList);
+        launchDetailViewPager.setAdapter(adapter);
+        launchDetailViewPager.setCurrentItem(index);
     }
 
     @Override
@@ -84,36 +67,12 @@ public class LaunchDetailActivity extends BaseActivity {
         LogHelper.getInstance().logScreenName(LaunchDetailActivity.this, LogHelper.logScreenName_launchDetail);
     }
 
-    private void initView() {
-        launchDateTextView.setText(DateHelper.getInstance().convertServiceDateToShortDate(spaceXLaunchItem.getLaunch_date_utc()));
-
-        launchStateTextView.setText(getString(spaceXLaunchItem.launch_success ? R.string.launch_success : R.string.launch_failed));
-        launchStateTextView.setTextColor(ContextCompat.getColor(this, spaceXLaunchItem.launch_success ?
-                R.color.success_state_color : R.color.failed_state_color));
-
-        String imageUrl = spaceXLaunchItem.getLaunchImageUrl();
-        int size = (int) (44.0f * LaunchesApplication.getApplication().getResources().getDisplayMetrics().density);
-        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl))
-                .setResizeOptions(new ResizeOptions(size, size))
-                .build();
-
-        PipelineDraweeControllerBuilder controller = Fresco.newDraweeControllerBuilder();
-        controller.setImageRequest(request);
-        launchImageView.setController(controller.build());
-
-        launchSiteTextView.setText(getString(R.string.launch_site, spaceXLaunchItem.launch_site.getSite_name_long()));
-        rocketInfoTextView.setText(getString(R.string.rocket_info,
-                spaceXLaunchItem.rocket.getRocket_name(),
-                spaceXLaunchItem.rocket.getRocket_type()));
-        launchDetailTextView.setText(spaceXLaunchItem.getDetails());
-    }
-
     // OnClick LISTENERS
     @OnClick(R.id.back_Button)
     public void backButtonClicked(View v) {
         finish();
     }
-
+    
     // ACTION BAR
     private void initActionBar() {
         setSupportActionBar(toolbar);

@@ -41,6 +41,9 @@ public class LaunchListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public ArrayList<SpaceXLaunchItem> getDataSource() {
+        return dataSource;
+    }
 
     @Override
     public int getCount() {
