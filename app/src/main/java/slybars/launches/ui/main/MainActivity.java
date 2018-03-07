@@ -37,6 +37,9 @@ import slybars.launches.ui.launchdetail.LaunchDetailActivity;
 
 public class MainActivity extends BaseActivity implements LaunchFilterListener, AdapterView.OnItemClickListener {
 
+    private static int LAUNCH_DETAIL_REQUEST_CODE = 99;
+    public static String FLIGHT_NUMBER_EXTRA = "FLIGHT_NUMBER_EXTRA";
+
     @BindView(R.id.filter_and_sort_LinearLayout)
     LinearLayout filterAndSortLinearLayout;
 
@@ -92,6 +95,22 @@ public class MainActivity extends BaseActivity implements LaunchFilterListener, 
         compositeDisposable.dispose();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == LAUNCH_DETAIL_REQUEST_CODE && resultCode == RESULT_OK) {
+            int flightNumber = data.getIntExtra(FLIGHT_NUMBER_EXTRA, -1);
+            if(launchListAdapter != null && launchListAdapter.getDataSource() != null){
+                for(int i = 0; i < launchListAdapter.getDataSource().size(); i++) {
+                    SpaceXLaunchItem item = launchListAdapter.getDataSource().get(i);
+                    if(item.flight_number == flightNumber) {
+                        launchListView.setSelection(i);
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
     // SERVICE CALL
     private void getSpaceXLaunches() {
@@ -166,7 +185,8 @@ public class MainActivity extends BaseActivity implements LaunchFilterListener, 
         SpaceXLaunchItem selectedListItem = (SpaceXLaunchItem) adapterView.getItemAtPosition(i);
 
         if(selectedListItem != null && adapterView.getAdapter() == launchListAdapter) {
-            startActivity(LaunchDetailActivity.getLaunchDetailIntent(MainActivity.this, launchListAdapter.getDataSource(), i));
+            startActivityForResult(LaunchDetailActivity.getLaunchDetailIntent(MainActivity.this, launchListAdapter.getDataSource(), i),
+                    LAUNCH_DETAIL_REQUEST_CODE);
         }
     }
 

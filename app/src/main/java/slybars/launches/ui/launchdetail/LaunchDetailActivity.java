@@ -18,6 +18,8 @@ import slybars.launches.common.helper.LogHelper;
 import slybars.launches.model.entities.SpaceXLaunchItem;
 import slybars.launches.ui.base.BaseActivity;
 
+import static slybars.launches.ui.main.MainActivity.FLIGHT_NUMBER_EXTRA;
+
 /**
  * Created by slybars on 04/03/2018.
  */
@@ -65,6 +67,17 @@ public class LaunchDetailActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         LogHelper.getInstance().logScreenName(LaunchDetailActivity.this, LogHelper.logScreenName_launchDetail);
+    }
+
+    @Override
+    public void finish() {
+        if(launchList != null && launchList.size() > launchDetailViewPager.getCurrentItem()) {
+            Intent resultIntent = new Intent();
+            SpaceXLaunchItem selectedItem = launchList.get(launchDetailViewPager.getCurrentItem());
+            resultIntent.putExtra(FLIGHT_NUMBER_EXTRA, selectedItem.flight_number);
+            setResult(RESULT_OK, resultIntent);
+        }
+        super.finish();
     }
 
     // OnClick LISTENERS
